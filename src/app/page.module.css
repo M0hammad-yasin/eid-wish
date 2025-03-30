@@ -243,7 +243,7 @@
   }
 
   .pageContent p {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .navButton {
@@ -363,4 +363,24 @@
   .developerDetails p {
     font-size: 0.75rem;
   }
+}
+.qrCode {
+  display: flex;
+  align-self: self-end;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100px;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qrCode img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }

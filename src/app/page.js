@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon, FaStar } from "react-icons/fa";
 import styles from "./page.module.css";
-
+import useTypewriter from "../hooks/useTypewriter";
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
@@ -23,13 +23,13 @@ export default function Home() {
   const messages = [
     {
       title: "Eid Wishing",
-      content: "Apko meri taraf sy boht boht eid mubarek",
+      content: "اپ کو میری طرف سے بہت بہت عید مبارک",
       background: "ramadan-bg",
     },
     {
       title: "Ramadan Reflections",
       content:
-        "عید مبارک! رمضان میں صبر، محنت اور قربانی کا جو جذبہ دکھایا، وہ قابل تعریف ہے۔ اللہ آپ کی عبادات اور کاوشوں کو قبول کرے اور زندگی میں خوشیوں اور کامیابیوں سے نوازے۔",
+        "  اللّٰہ تعالیٰ آپ کی عبادات اور کاوشوں کو اپنی بارگاہ میں شرفِ قبولیت عطا فرمائے اور آپ کو خوشحالی و کامیابیوں سے نوازے۔",
       background: "ramadan-bg",
     },
     {
@@ -41,20 +41,30 @@ export default function Home() {
     {
       title: "Honoring Women",
       content:
-        "عید مبارک! رمضان بھر ہماری مائیں، بہنیں، بیٹیاں اور بیویاں بے لوث خدمت میں مصروف رہیں۔ سحری میں سب کو جگانا، افطار کی تیاری، گھر کے کام اور پھر اپنی عبادات—ان کی قربانیاں بے مثال ہیں۔ اللّٰہ ان کی محنت، صبر اور محبت کو قبول فرمائے اور انہیں بے شمار خوشیوں سے نوازے۔ آپ سب عظیم ہیں، آپ کی محبتوں کو سلام!",
+        " رمضان بھر ہماری مائیں، بہنیں، بیٹیاں اور بیویاں بے لوث خدمت میں مصروف رہیں۔ سحری میں سب کو جگانا، افطار کی تیاری، گھر کے کام اور پھر اپنی عبادات—ان کی قربانیاں بے مثال ہیں۔ اللّٰہ ان کی محنت، صبر اور محبت کو قبول فرمائے اور انہیں بے شمار خوشیوں سے نوازے۔ آپ سب عظیم ہیں، آپ کی محبتوں کو سلام",
+      background: "women-bg",
+    },
+    {
+      title: "Eidi dedo yrr 😍😜💸",
+      content:
+        " عید کی خوشیاں بانٹیں، خاص طور پر اُن سے جو صرف عیدی مانگنے آتے ہیں! 😜💸 خیر، اگر دل کرے تو اس QR کوڈ پر عیدی بھیج دیں، قسمت اچھی ہوئی تو مل ہی جائے! 😂🎁 ",
       background: "women-bg",
     },
   ];
+  const { displayedText, isTyping } = useTypewriter(
+    messages[currentPage]?.content || "",
+    30 // Speed of typing (milliseconds per character)
+  );
 
   const nextPage = () => {
-    if (currentPage < messages.length - 1) {
+    if (currentPage < messages.length - 1 && !isTyping) {
       setDirection(1);
       setCurrentPage(currentPage + 1);
     }
   };
 
   const prevPage = () => {
-    if (currentPage > 0) {
+    if (currentPage > 0 && !isTyping) {
       setDirection(-1);
       setCurrentPage(currentPage - 1);
     }
@@ -122,7 +132,13 @@ export default function Home() {
             className={styles.pageContent}
           >
             <h1>{messages[currentPage].title}</h1>
-            <p className={styles.urduText}>{messages[currentPage].content}</p>
+            <p className={styles.urduText}>{displayedText}</p>
+            {isTyping && <span className={styles.cursor}>|</span>}
+            {currentPage == messages.length - 1 && (
+              <div className={styles.qrCode}>
+                <img src="/qr-code.jpg" alt="QR Code" />
+              </div>
+            )}
           </motion.div>
         </AnimatePresence>
 
