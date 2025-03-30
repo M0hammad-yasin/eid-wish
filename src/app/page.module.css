@@ -1,15 +1,36 @@
 .main {
-  background-image: url("/public/page1-background.jpg");
+  background-image: url("/page1-background.png");
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 2.5rem;
   position: relative;
   overflow: hidden;
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: auto;
   transition: background 1s ease;
   color: white;
+}
+.imgParent {
+  min-width: 250px;
+  max-width: 500px;
+}
+.topGraphics {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* height: 100%; Fixed height */
+  z-index: 1000;
+  background: transparent;
+  background-image: url("/top-graphics.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain; /* This will ensure the image fits within its container */
 }
 
 /* Background styles */
@@ -29,18 +50,18 @@
 }
 
 .ramadan-bg {
-  background-color: #1a1a2e;
-  background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  /* background-color: #1a1a2e; */
+  background-image: url("/page1-background.png");
 }
 
 .eid-bg {
-  background-color: #0f3460;
-  background-image: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+  /* background-color: #0f3460; */
+  /* background-image: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%); */
 }
 
 .women-bg {
-  background-color: #432371;
-  background-image: linear-gradient(135deg, #432371 0%, #16213e 100%);
+  /* background-color: #432371; */
+  /* background-image: linear-gradient(135deg, #432371 0%, #16213e 100%); */
 }
 
 /* Floating elements */
@@ -50,7 +71,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2;
+  z-index: 100000;
   pointer-events: none;
 }
 
@@ -83,7 +104,11 @@
 /* Content styles */
 .pageContent {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   max-width: 800px;
+  flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
   padding: 2rem;
   border-radius: 15px;
@@ -196,5 +221,105 @@
   .navButton {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+  }
+}
+.footer {
+  width: 100%;
+  margin-top: 3rem;
+  padding: 1rem 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  color: white;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  gap: 1rem;
+}
+
+.ramadanInfo {
+  flex: 1;
+  min-width: 0; /* Allows text to wrap properly */
+}
+
+.ramadanInfo h3 {
+  color: gold;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.ramadanInfo p {
+  line-height: 1.4;
+  font-size: 0.85rem;
+}
+
+.developerInfo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 0; /* Allows content to shrink properly */
+}
+
+.developerProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profilePicture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid gold;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.profilePicture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.developerDetails h3 {
+  color: gold;
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.developerDetails p {
+  margin: 0.15rem 0;
+  margin-top: 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .footerContent {
+    gap: 0.5rem;
+  }
+
+  .profilePicture {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ramadanInfo h3,
+  .developerDetails h3 {
+    font-size: 1rem;
+  }
+
+  .ramadanInfo p,
+  .developerDetails p {
+    font-size: 0.75rem;
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon, FaStar } from "react-icons/fa";
 import styles from "./page.module.css";
@@ -8,6 +8,16 @@ import styles from "./page.module.css";
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
+  const [starStyles, setStarStyles] = useState([]);
+  useEffect(() => {
+    const styles = [...Array(20)].map(() => ({
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 5}s`,
+      fontSize: `${Math.random() * 1 + 0.5}rem`,
+    }));
+    setStarStyles(styles);
+  }, []);
 
   // Messages content
   const messages = [
@@ -68,81 +78,115 @@ export default function Home() {
   };
 
   return (
-    <main
-      className={`${styles.main} ${styles[messages[currentPage].background]}`}
-    >
-      {/* Floating elements */}
-      <div className={styles.floatingElements}>
-        <div className={styles.moon}>
-          <FaMoon size={60} color="gold" />
+    <>
+      {" "}
+      <main
+        className={`${styles.main} ${styles[messages[currentPage].background]}`}
+      >
+        {/* Floating elements */}
+        <div className={styles.imgParent}>
+          <img
+            className={styles.topGraphics}
+            src="/top-graphics.png"
+            alt="Floating elements"
+          />
         </div>
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className={styles.star}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              fontSize: `${Math.random() * 1 + 0.5}rem`,
-            }}
-          >
-            <FaStar color="gold" />
+        <div className={styles.floatingElements}>
+          <div className={styles.moon}>
+            <FaMoon size={60} color="gold" />
           </div>
-        ))}
-      </div>
-
-      {/* Calligraphy pattern overlay */}
-      <div className={styles.calligraphyPattern}></div>
-
-      {/* Message content */}
-      <AnimatePresence initial={false} custom={direction} mode="wait">
-        <motion.div
-          key={currentPage}
-          custom={direction}
-          variants={pageVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={pageTransition}
-          className={styles.pageContent}
-        >
-          <h1>{messages[currentPage].title}</h1>
-          <p>{messages[currentPage].content}</p>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Navigation buttons */}
-      <div className={styles.navigation}>
-        <button
-          onClick={prevPage}
-          disabled={currentPage === 0}
-          className={`${styles.navButton} ${
-            currentPage === 0 ? styles.disabled : ""
-          }`}
-        >
-          Previous
-        </button>
-        <div className={styles.pageIndicator}>
-          {messages.map((_, index) => (
-            <span
-              key={index}
-              className={`${styles.dot} ${
-                currentPage === index ? styles.activeDot : ""
-              }`}
-            ></span>
+          {starStyles.map((style, i) => (
+            <div key={i} className={styles.star} style={style}>
+              <FaStar color="gold" />
+            </div>
           ))}
         </div>
-        <button
-          onClick={nextPage}
-          disabled={currentPage === messages.length - 1}
-          className={`${styles.navButton} ${
-            currentPage === messages.length - 1 ? styles.disabled : ""
-          }`}
-        >
-          Next Message
-        </button>
-      </div>
-    </main>
+
+        {/* Calligraphy pattern overlay */}
+        <div className={styles.calligraphyPattern}></div>
+
+        {/* Message content */}
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentPage}
+            custom={direction}
+            variants={pageVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={pageTransition}
+            className={styles.pageContent}
+          >
+            <h1>{messages[currentPage].title}</h1>
+            <p>{messages[currentPage].content}</p>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation buttons */}
+        <div className={styles.navigation}>
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 0}
+            className={`${styles.navButton} ${
+              currentPage === 0 ? styles.disabled : ""
+            }`}
+          >
+            Previous
+          </button>
+          <div className={styles.pageIndicator}>
+            {messages.map((_, index) => (
+              <span
+                key={index}
+                className={`${styles.dot} ${
+                  currentPage === index ? styles.activeDot : ""
+                }`}
+              ></span>
+            ))}
+          </div>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === messages.length - 1}
+            className={`${styles.navButton} ${
+              currentPage === messages.length - 1 ? styles.disabled : ""
+            }`}
+          >
+            Next Message
+          </button>
+        </div>
+        {/* Floating elements */}
+        <div className={styles.imgParent}>
+          <img
+            className={styles.topGraphics}
+            src="/top-graphics.png"
+            alt="Floating elements"
+          />
+        </div>
+        {/* Remove duplicate floating elements section */}
+      </main>
+      <footer className={styles.footer}>
+        <div className={styles.footerContent}>
+          <div className={styles.ramadanInfo}>
+            <h3>The Significance of Ramadan</h3>
+            <p>
+              Ramadan is a blessed month of mercy, reflection, and devotion,
+              where hearts are purified, souls are uplifted, and faith is
+              strengthened through fasting, prayer, and generosity.
+            </p>
+          </div>
+          <div className={styles.developerInfo}>
+            <div className={styles.developerProfile}>
+              <div className={styles.profilePicture}>
+                <img src="/developer.jpg" alt="Developer" />
+              </div>
+              <div className={styles.developerDetails}>
+                <h3>Muhammad Yasin</h3>
+                <p>Created with ❤️ and dedication</p>
+                <p>© 2025 Eid Wish App</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
   );
 }
