@@ -1,7 +1,20 @@
+@font-face {
+  font-family: "Jameel Noori Nastaleeq";
+  src: url("/fonts/JameelNooriNastaleeq.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.urduText {
+  font-family: "Jameel Noori Nastaleeq", serif !important;
+  direction: rtl !important;
+  text-align: right !important;
+}
 .main {
-  background-image: url("/page1-background.png");
-  width: 100%;
-  min-height: 100vh;
+  background: transparent;
+  flex: 1;
+  /* width: 100%; */
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,11 +22,25 @@
   padding: 2.5rem;
   position: relative;
   overflow: hidden;
+  background-image: url("/page1-background.png");
   background-position: center;
   background-repeat: repeat-x;
   background-size: auto;
   transition: background 1s ease;
   color: white;
+}
+.parent {
+  position: relative;
+  /* max-width: 300px; */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  background-image: url("/page1-background.png");
+
+  /* overflow: hidden; This will prevent scrolling */
+  /* background: linear-gradient(to bottom, #1a1a2e, #33334d); */
 }
 .imgParent {
   min-width: 250px;
@@ -29,7 +56,7 @@
   background: transparent;
   background-image: url("/top-graphics.png");
   background-position: top center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   background-size: contain; /* This will ensure the image fits within its container */
 }
 
@@ -105,29 +132,30 @@
 .pageContent {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   max-width: 800px;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
+  padding: 1rem;
   border-radius: 15px;
   border: 1px solid rgba(255, 215, 0, 0.3);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
-  z-index: 3;
+  z-index: 10000000;
   text-align: center;
 }
 
 .pageContent h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
   color: gold;
   font-family: "Amiri", serif;
 }
 
 .pageContent p {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 1.8;
 }
 
@@ -137,7 +165,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 300px;
   margin-top: 2rem;
   z-index: 3;
 }
@@ -224,11 +252,24 @@
   }
 }
 .footer {
-  width: 100%;
-  margin-top: 3rem;
-  padding: 1rem 0;
+  max-width: 800px;
+  min-width: 320px;
+  bottom: 0;
+  left: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
   background-color: rgba(0, 0, 0, 0.7);
-  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 1rem 0.2rem;
+  margin: 4px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  z-index: 3;
+  text-align: center;
   color: white;
 }
 
@@ -249,7 +290,7 @@
 }
 
 .ramadanInfo h3 {
-  color: gold;
+  color: rgba(183, 158, 17, 0.715);
   margin-bottom: 0.5rem;
   font-size: 1.2rem;
 }
@@ -291,7 +332,7 @@
 }
 
 .developerDetails h3 {
-  color: gold;
+  color: rgb(164, 142, 19);
   margin-bottom: 0.25rem;
   font-size: 1.1rem;
 }

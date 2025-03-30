@@ -22,21 +22,26 @@ export default function Home() {
   // Messages content
   const messages = [
     {
+      title: "Eid Wishing",
+      content: "Apko meri taraf sy boht boht eid mubarek",
+      background: "ramadan-bg",
+    },
+    {
       title: "Ramadan Reflections",
       content:
-        "As the blessed month of Ramadan comes to a close, we reflect on the patience, prayers, and spiritual growth we've experienced. May Allah accept our fasts, our prayers, and all our good deeds.",
+        "عید مبارک! رمضان میں صبر، محنت اور قربانی کا جو جذبہ دکھایا، وہ قابل تعریف ہے۔ اللہ آپ کی عبادات اور کاوشوں کو قبول کرے اور زندگی میں خوشیوں اور کامیابیوں سے نوازے۔",
       background: "ramadan-bg",
     },
     {
       title: "Eid Mubarak",
       content:
-        "May the joy and blessings of Eid fill your heart and home. As we celebrate this special day, let us remember those less fortunate and share our happiness with them. Eid Mubarak to you and your loved ones!",
+        "عید مبارک! یہ خوشیوں بھرا دن آپ کے دل کو سکون، روح کو راحت اور زندگی کو خوشحالی سے بھر دے۔ دعا ہے کہ آپ اور آپ کی فیملی پر رحمتیں نازل ہوں، محبتیں بکھریں اور ہر لمحہ مسکراہٹوں سے جگمگائے۔!",
       background: "eid-bg",
     },
     {
       title: "Honoring Women",
       content:
-        "On this blessed Eid, we extend our deepest appreciation to the mothers, sisters, daughters, and wives who have shown tireless dedication throughout Ramadan. Your sacrifices in preparing suhoor and iftar, your patience, and your spiritual guidance have made this month truly special for all of us.",
+        "عید مبارک! رمضان بھر ہماری مائیں، بہنیں، بیٹیاں اور بیویاں بے لوث خدمت میں مصروف رہیں۔ سحری میں سب کو جگانا، افطار کی تیاری، گھر کے کام اور پھر اپنی عبادات—ان کی قربانیاں بے مثال ہیں۔ اللّٰہ ان کی محنت، صبر اور محبت کو قبول فرمائے اور انہیں بے شمار خوشیوں سے نوازے۔ آپ سب عظیم ہیں، آپ کی محبتوں کو سلام!",
       background: "women-bg",
     },
   ];
@@ -78,8 +83,7 @@ export default function Home() {
   };
 
   return (
-    <>
-      {" "}
+    <div className={styles.parent}>
       <main
         className={`${styles.main} ${styles[messages[currentPage].background]}`}
       >
@@ -93,7 +97,7 @@ export default function Home() {
         </div>
         <div className={styles.floatingElements}>
           <div className={styles.moon}>
-            <FaMoon size={60} color="gold" />
+            <FaMoon size={50} color="gold" />
           </div>
           {starStyles.map((style, i) => (
             <div key={i} className={styles.star} style={style}>
@@ -118,7 +122,7 @@ export default function Home() {
             className={styles.pageContent}
           >
             <h1>{messages[currentPage].title}</h1>
-            <p>{messages[currentPage].content}</p>
+            <p className={styles.urduText}>{messages[currentPage].content}</p>
           </motion.div>
         </AnimatePresence>
 
@@ -150,7 +154,7 @@ export default function Home() {
               currentPage === messages.length - 1 ? styles.disabled : ""
             }`}
           >
-            Next Message
+            Next
           </button>
         </div>
         {/* Floating elements */}
@@ -187,6 +191,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
