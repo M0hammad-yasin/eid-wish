@@ -1,22 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon, FaStar } from "react-icons/fa";
+import Image from "next/image";
 import styles from "./page.module.css";
 import useTypewriter from "../hooks/useTypewriter";
+const Footer = lazy(() => import("../components/Footer"));
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
   const [starStyles, setStarStyles] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    const styles = [...Array(20)].map(() => ({
-      top: `${Math.random() * 100}%`,
-      left: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 5}s`,
-      fontSize: `${Math.random() * 1 + 0.5}rem`,
-    }));
-    setStarStyles(styles);
+    // Defer non-critical calculations
+    const timer = setTimeout(() => {
+      const styles = [...Array(20)].map(() => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 5}s`,
+        fontSize: `${Math.random() * 1 + 0.5}rem`,
+      }));
+      setStarStyles(styles);
+      setIsLoaded(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Messages content
@@ -47,7 +56,7 @@ export default function Home() {
     {
       title: "Eidi dedo yrr 😍😜💸",
       content:
-        " عید کی خوشیاں بانٹیں، خاص طور پر اُن سے جو صرف عیدی مانگنے آتے ہیں! 😜💸 خیر، اگر دل کرے تو اس QR کوڈ پر عیدی بھیج دیں، قسمت اچھی ہوئی تو مل ہی جائے! 😂🎁 ",
+        " عید کی خوشیاں بانٹیں، خاص طور پر اُن سے جو صرف عیدی مانگنے آتے ہیں! 😜💸 خیر، اگر اپ کا دل کرے تو اس QR کوڈ پر عیدی بھیج دیں، قسمت اچھی ہوئی تو مل ہی جائے! 😂🎁 ",
       background: "women-bg",
     },
   ];
@@ -105,16 +114,18 @@ export default function Home() {
             alt="Floating elements"
           />
         </div>
-        <div className={styles.floatingElements}>
-          <div className={styles.moon}>
-            <FaMoon size={50} color="gold" />
-          </div>
-          {starStyles.map((style, i) => (
-            <div key={i} className={styles.star} style={style}>
-              <FaStar color="gold" />
+        {isLoaded && (
+          <div className={styles.floatingElements}>
+            <div className={styles.moon}>
+              <FaMoon size={50} color="gold" />
             </div>
-          ))}
-        </div>
+            {starStyles.map((style, i) => (
+              <div key={i} className={styles.star} style={style}>
+                <FaStar color="gold" />
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Calligraphy pattern overlay */}
         <div className={styles.calligraphyPattern}></div>
@@ -183,30 +194,9 @@ export default function Home() {
         </div>
         {/* Remove duplicate floating elements section */}
       </main>
-      <footer className={styles.footer}>
-        <div className={styles.footerContent}>
-          <div className={styles.ramadanInfo}>
-            <h3>The Significance of Ramadan</h3>
-            <p>
-              Ramadan is a blessed month of mercy, reflection, and devotion,
-              where hearts are purified, souls are uplifted, and faith is
-              strengthened through fasting, prayer, and generosity.
-            </p>
-          </div>
-          <div className={styles.developerInfo}>
-            <div className={styles.developerProfile}>
-              <div className={styles.profilePicture}>
-                <img src="/developer.jpg" alt="Developer" />
-              </div>
-              <div className={styles.developerDetails}>
-                <h3>Muhammad Yasin</h3>
-                <p>Created with ❤️ and dedication</p>
-                <p>© 2025 Eid Wish App</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
