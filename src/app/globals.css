@@ -1,208 +1,28 @@
-@import "tailwindcss";
-/* File: styles/Home.module.css */
-.container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  position: relative;
-  overflow: hidden;
-  transition: background 1s ease;
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: white;
+  background: #0f0f1e;
 }
 
-/* Background styles */
-.main::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.7),
-    rgba(0, 0, 0, 0.4)
-  );
-  z-index: 1;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.ramadan-bg {
-  background-color: #1a1a2e;
-  background-image: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-}
-
-.eid-bg {
-  background-color: #0f3460;
-  background-image: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
-}
-
-.women-bg {
-  background-color: #432371;
-  background-image: linear-gradient(135deg, #432371 0%, #16213e 100%);
-}
-
-/* Floating elements */
-.floatingElements {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.moon {
-  position: absolute;
-  top: 10%;
-  right: 10%;
-  animation: glow 4s infinite alternate;
-}
-
-.star {
-  position: absolute;
-  animation: twinkle 3s infinite alternate;
-}
-
-/* Calligraphy pattern */
-.calligraphyPattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("/calligraphy-pattern.svg");
-  background-size: cover;
-  opacity: 0.1;
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Content styles */
-.pageContent {
-  position: relative;
-  max-width: 800px;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  z-index: 3;
-  text-align: center;
-}
-
-.pageContent h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: gold;
-  font-family: "Amiri", serif;
-}
-
-.pageContent p {
-  font-size: 1.2rem;
-  line-height: 1.8;
-}
-
-/* Navigation styles */
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 600px;
-  margin-top: 2rem;
-  z-index: 3;
-}
-
-.navButton {
-  background: rgba(255, 215, 0, 0.2);
-  color: gold;
-  border: 1px solid gold;
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.navButton:hover:not(.disabled) {
-  background: rgba(255, 215, 0, 0.4);
-  transform: translateY(-2px);
-}
-
-.navButton.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.pageIndicator {
-  display: flex;
-  gap: 8px;
-}
-
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.activeDot {
-  background: gold;
-}
-
-/* Animations */
-@keyframes glow {
-  0% {
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
-  }
-  100% {
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
-  }
-}
-
-@keyframes twinkle {
-  0% {
-    opacity: 0.2;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .pageContent {
-    padding: 1.5rem;
-  }
-
-  .pageContent h1 {
-    font-size: 2rem;
-  }
-
-  .pageContent p {
-    font-size: 1rem;
-  }
-
-  .navButton {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
+button {
+  font-family: inherit;
 }

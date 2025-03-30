@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <!-- Background pattern grid -->
+  <defs>
+    <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gold" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+    <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+      <rect width="100" height="100" fill="url(#smallGrid)"/>
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gold" stroke-width="1" opacity="0.2"/>
+    </pattern>
+  </defs>
+  
+  <!-- Main background with pattern -->
+  <rect width="100%" height="100%" fill="url(#grid)" opacity="0.3"/>
+  
+  <!-- Decorative calligraphy-inspired elements -->
+  <!-- Central star pattern -->
+  <g transform="translate(500, 500)" opacity="0.6">
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(0)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(45)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(90)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(135)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(180)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(225)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(270)"/>
+    <path d="M0,0 L80,0 A80,80 0 0,1 40,69.28 z" fill="none" stroke="gold" stroke-width="2" transform="rotate(315)"/>
+  </g>
+  
+  <!-- Repeating geometric patterns -->
+  <g opacity="0.4">
+    <!-- Top left corner design -->
+    <g transform="translate(200, 200)">
+      <circle cx="0" cy="0" r="50" fill="none" stroke="gold" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="70" fill="none" stroke="gold" stroke-width="1"/>
+      <path d="M-25,-43.3 L0,-50 L25,-43.3 L43.3,-25 L50,0 L43.3,25 L25,43.3 L0,50 L-25,43.3 L-43.3,25 L-50,0 L-43.3,-25 Z" fill="none" stroke="gold" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Bottom right corner design -->
+    <g transform="translate(800, 800)">
+      <circle cx="0" cy="0" r="50" fill="none" stroke="gold" stroke-width="1.5"/>
+      <circle cx="0" cy="0" r="70" fill="none" stroke="gold" stroke-width="1"/>
+      <path d="M-25,-43.3 L0,-50 L25,-43.3 L43.3,-25 L50,0 L43.3,25 L25,43.3 L0,50 L-25,43.3 L-43.3,25 L-50,0 L-43.3,-25 Z" fill="none" stroke="gold" stroke-width="1.5"/>
+    </g>
+  </g>
+  
+  <!-- Crescent moon motifs -->
+  <g opacity="0.6">
+    <path d="M200,400 A120,120 0 1,1 150,600 A80,80 0 1,0 200,400 Z" fill="none" stroke="gold" stroke-width="2"/>
+    <path d="M800,400 A120,120 0 1,0 850,600 A80,80 0 1,1 800,400 Z" fill="none" stroke="gold" stroke-width="2"/>
+  </g>
+  
+  <!-- Flowing arabesque patterns -->
+  <g opacity="0.5">
+    <path d="M100,300 Q200,250 150,350 Q100,450 200,400 Q300,350 250,450 Q200,550 300,500 Q400,450 350,550 Q300,650 400,600" fill="none" stroke="gold" stroke-width="1.5"/>
+    <path d="M600,300 Q700,250 650,350 Q600,450 700,400 Q800,350 750,450 Q700,550 800,500 Q900,450 850,550 Q800,650 900,600" fill="none" stroke="gold" stroke-width="1.5"/>
+    <path d="M100,700 Q200,650 150,750 Q100,850 200,800 Q300,750 250,850 Q200,950 300,900" fill="none" stroke="gold" stroke-width="1.5"/>
+    <path d="M600,700 Q700,650 650,750 Q600,850 700,800 Q800,750 750,850 Q700,950 800,900" fill="none" stroke="gold" stroke-width="1.5"/>
+  </g>
+</svg>

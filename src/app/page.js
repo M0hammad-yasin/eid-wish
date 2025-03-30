@@ -1,9 +1,9 @@
-// File: pages/index.js
-import { useState, useEffect } from "react";
-import Head from "next/head";
+"use client";
+
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaMoon, FaStar } from "react-icons/fa";
-import styles from "../styles/Home.module";
+import styles from "./page.module.css";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -68,92 +68,81 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Eid Wishes Animated Experience</title>
-        <meta
-          name="description"
-          content="Interactive Eid Wishes experience with Islamic-inspired visuals"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main
-        className={`${styles.main} ${styles[messages[currentPage].background]}`}
-      >
-        {/* Floating elements */}
-        <div className={styles.floatingElements}>
-          <div className={styles.moon}>
-            <FaMoon size={60} color="gold" />
+    <main
+      className={`${styles.main} ${styles[messages[currentPage].background]}`}
+    >
+      {/* Floating elements */}
+      <div className={styles.floatingElements}>
+        <div className={styles.moon}>
+          <FaMoon size={60} color="gold" />
+        </div>
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className={styles.star}
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              fontSize: `${Math.random() * 1 + 0.5}rem`,
+            }}
+          >
+            <FaStar color="gold" />
           </div>
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className={styles.star}
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                fontSize: `${Math.random() * 1 + 0.5}rem`,
-              }}
-            >
-              <FaStar color="gold" />
-            </div>
+        ))}
+      </div>
+
+      {/* Calligraphy pattern overlay */}
+      <div className={styles.calligraphyPattern}></div>
+
+      {/* Message content */}
+      <AnimatePresence initial={false} custom={direction} mode="wait">
+        <motion.div
+          key={currentPage}
+          custom={direction}
+          variants={pageVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={pageTransition}
+          className={styles.pageContent}
+        >
+          <h1>{messages[currentPage].title}</h1>
+          <p>{messages[currentPage].content}</p>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation buttons */}
+      <div className={styles.navigation}>
+        <button
+          onClick={prevPage}
+          disabled={currentPage === 0}
+          className={`${styles.navButton} ${
+            currentPage === 0 ? styles.disabled : ""
+          }`}
+        >
+          Previous
+        </button>
+        <div className={styles.pageIndicator}>
+          {messages.map((_, index) => (
+            <span
+              key={index}
+              className={`${styles.dot} ${
+                currentPage === index ? styles.activeDot : ""
+              }`}
+            ></span>
           ))}
         </div>
-
-        {/* Calligraphy pattern overlay */}
-        <div className={styles.calligraphyPattern}></div>
-
-        {/* Message content */}
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentPage}
-            custom={direction}
-            variants={pageVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={pageTransition}
-            className={styles.pageContent}
-          >
-            <h1>{messages[currentPage].title}</h1>
-            <p>{messages[currentPage].content}</p>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation buttons */}
-        <div className={styles.navigation}>
-          <button
-            onClick={prevPage}
-            disabled={currentPage === 0}
-            className={`${styles.navButton} ${
-              currentPage === 0 ? styles.disabled : ""
-            }`}
-          >
-            Previous
-          </button>
-          <div className={styles.pageIndicator}>
-            {messages.map((_, index) => (
-              <span
-                key={index}
-                className={`${styles.dot} ${
-                  currentPage === index ? styles.activeDot : ""
-                }`}
-              ></span>
-            ))}
-          </div>
-          <button
-            onClick={nextPage}
-            disabled={currentPage === messages.length - 1}
-            className={`${styles.navButton} ${
-              currentPage === messages.length - 1 ? styles.disabled : ""
-            }`}
-          >
-            Next Message
-          </button>
-        </div>
-      </main>
-    </div>
+        <button
+          onClick={nextPage}
+          disabled={currentPage === messages.length - 1}
+          className={`${styles.navButton} ${
+            currentPage === messages.length - 1 ? styles.disabled : ""
+          }`}
+        >
+          Next Message
+        </button>
+      </div>
+    </main>
   );
 }
