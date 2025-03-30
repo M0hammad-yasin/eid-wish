@@ -1,103 +1,159 @@
-import Image from "next/image";
+// File: pages/index.js
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaMoon, FaStar } from "react-icons/fa";
+import styles from "../styles/Home.module";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentPage, setCurrentPage] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  // Messages content
+  const messages = [
+    {
+      title: "Ramadan Reflections",
+      content:
+        "As the blessed month of Ramadan comes to a close, we reflect on the patience, prayers, and spiritual growth we've experienced. May Allah accept our fasts, our prayers, and all our good deeds.",
+      background: "ramadan-bg",
+    },
+    {
+      title: "Eid Mubarak",
+      content:
+        "May the joy and blessings of Eid fill your heart and home. As we celebrate this special day, let us remember those less fortunate and share our happiness with them. Eid Mubarak to you and your loved ones!",
+      background: "eid-bg",
+    },
+    {
+      title: "Honoring Women",
+      content:
+        "On this blessed Eid, we extend our deepest appreciation to the mothers, sisters, daughters, and wives who have shown tireless dedication throughout Ramadan. Your sacrifices in preparing suhoor and iftar, your patience, and your spiritual guidance have made this month truly special for all of us.",
+      background: "women-bg",
+    },
+  ];
+
+  const nextPage = () => {
+    if (currentPage < messages.length - 1) {
+      setDirection(1);
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 0) {
+      setDirection(-1);
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Page variants for transitions
+  const pageVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? -1000 : 1000,
+      opacity: 0,
+    }),
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5,
+  };
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Eid Wishes Animated Experience</title>
+        <meta
+          name="description"
+          content="Interactive Eid Wishes experience with Islamic-inspired visuals"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <main
+        className={`${styles.main} ${styles[messages[currentPage].background]}`}
+      >
+        {/* Floating elements */}
+        <div className={styles.floatingElements}>
+          <div className={styles.moon}>
+            <FaMoon size={60} color="gold" />
+          </div>
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={i}
+              className={styles.star}
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                fontSize: `${Math.random() * 1 + 0.5}rem`,
+              }}
+            >
+              <FaStar color="gold" />
+            </div>
+          ))}
+        </div>
+
+        {/* Calligraphy pattern overlay */}
+        <div className={styles.calligraphyPattern}></div>
+
+        {/* Message content */}
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={currentPage}
+            custom={direction}
+            variants={pageVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={pageTransition}
+            className={styles.pageContent}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <h1>{messages[currentPage].title}</h1>
+            <p>{messages[currentPage].content}</p>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation buttons */}
+        <div className={styles.navigation}>
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 0}
+            className={`${styles.navButton} ${
+              currentPage === 0 ? styles.disabled : ""
+            }`}
           >
-            Read our docs
-          </a>
+            Previous
+          </button>
+          <div className={styles.pageIndicator}>
+            {messages.map((_, index) => (
+              <span
+                key={index}
+                className={`${styles.dot} ${
+                  currentPage === index ? styles.activeDot : ""
+                }`}
+              ></span>
+            ))}
+          </div>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === messages.length - 1}
+            className={`${styles.navButton} ${
+              currentPage === messages.length - 1 ? styles.disabled : ""
+            }`}
+          >
+            Next Message
+          </button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
