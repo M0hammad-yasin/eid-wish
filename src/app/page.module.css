@@ -331,7 +331,8 @@
   object-fit: cover;
 }
 
-.developerDetails h3 {
+.developerDetails h3,
+.developerDetails a {
   color: rgb(164, 142, 19);
   margin-bottom: 0.25rem;
   font-size: 1.1rem;

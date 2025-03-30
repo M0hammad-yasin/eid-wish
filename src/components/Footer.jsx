@@ -19,7 +19,11 @@ const Footer = () => {
               <img src="/developer.jpg" alt="Developer" />
             </div>
             <div className={styles.developerDetails}>
-              <h3>Muhammad Yasin</h3>
+              <h3>
+                <a href="https://www.instagram.com/m0hammad_yasin/">
+                  Muhammad Yasin
+                </a>
+              </h3>
               <p>Created with ❤️ and dedication</p>
               <p>© 2025 Eid Wish App</p>
             </div>

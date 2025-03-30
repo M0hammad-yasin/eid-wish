@@ -7,6 +7,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import useTypewriter from "../hooks/useTypewriter";
 const Footer = lazy(() => import("../components/Footer"));
+const SimpleAnalytics = lazy(() => import("../components/SimpleAnalytics"));
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
@@ -62,7 +63,7 @@ export default function Home() {
   ];
   const { displayedText, isTyping } = useTypewriter(
     messages[currentPage]?.content || "",
-    30 // Speed of typing (milliseconds per character)
+    60 // Speed of typing (milliseconds per character)
   );
 
   const nextPage = () => {
@@ -196,6 +197,7 @@ export default function Home() {
       </main>
       <Suspense fallback={<div>Loading...</div>}>
         <Footer />
+        <SimpleAnalytics />
       </Suspense>
     </div>
   );
